@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.audio.hamishandandy" version="1.0" name="Hamish And Andy Podcasts" provider-name="dddanmar">
+	<requires></requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>audio</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Hamish And Andy</summary>
+		<description>Listen to free Hamish and Andy Podcasts. \r\n Requires python-requests module.</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+
+
