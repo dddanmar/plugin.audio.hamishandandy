@@ -27,9 +27,9 @@ def getPodcasts():
 def listPodcasts(folder=True, total=0):
 	podcasts = getPodcasts()
         for podcast in podcasts:
-            track_title = podcast['item_title']
-            track_artist = podcast['item_body']
-            item=xbmcgui.ListItem(track_title + " - " + track_artist)
+            track_title = urllib.quote_plus(podcast['item_title'])
+            track_artist = urllib.quote_plus(podcast['item_body'])
+            item=xbmcgui.ListItem(urllib.unquote_plus(track_title) + " - " + urllib.unquote_plus(track_artist))
             item.setProperty( "IsPlayable", "true" )
             for stream in podcast['roles']:
                     if stream['role_tag'] == "mobile_audio_low":
@@ -41,7 +41,7 @@ def listPodcasts(folder=True, total=0):
 def playPodcast(track_url, track_title, track_artist):
     item = xbmcgui.ListItem(path=track_url )
     item.setProperty( "IsPlayable", "true" )    
-    item.setInfo('music', {'title': track_title, 'artist' : track_artist})
+    item.setInfo('music', {'title': urllib.unquote_plus(track_title), 'artist' : urllib.unquote_plus(track_artist)})
     xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)
 
 def get_params():
