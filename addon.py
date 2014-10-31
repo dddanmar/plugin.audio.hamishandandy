@@ -1,8 +1,8 @@
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import os, sys
-import requests, json
+import json
 import urllib
-
+import urllib2
 __addon__       = xbmcaddon.Addon(id='plugin.audio.hamishandandy')
 __addonname__   = __addon__.getAddonInfo('name')
 __icon__        = __addon__.getAddonInfo('icon')
@@ -20,8 +20,11 @@ vicon = os.path.join(pluginpath,'icon.png')
 fanart = os.path.join(pluginpath,'fanart.jpg')
 
 def getPodcasts():
-    r = requests.get('http://mobile-backend.libsyn.com/app/items/app_id/handa/destination_id/97431/version/1.20.7/offset/0/size/30')
-    json_obj = json.loads(r.text)
+    r = urllib2.Request('http://mobile-backend.libsyn.com/app/items/app_id/handa/destination_id/97431/version/1.20.7/offset/0/size/30')
+    r = urllib2.urlopen(r)
+    r = r.read()
+    xbmc.log(r)
+    json_obj = json.loads(r)
     return json_obj
                 
 def listPodcasts(folder=True, total=0):
