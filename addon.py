@@ -68,17 +68,22 @@ def get_params():
 
 params=get_params()
 mode=None
+track_url=None
+track_title=None
+track_artist=None
 try: mode=int(params["mode"])
 except: pass
-itemId=0
-try: itemId=int(params["id"])
+try: track_url=params["track_url"]
 except: pass
-name = None
-try: name=urllib.unquote_plus(params["name"])
+try: track_title=params["track_title"]
 except: pass
-
+try: track_artist=params["track_artist"]
+except: pass
+print track_title
+print track_artist
+print track_url
 if mode==None:
 	listPodcasts()    
 elif mode==MODE_STREAM_PODCAST :
 	xbmc.log('PLAY PODCAST')
-	playPodcast(params['track_url'], params['track_title'], params['track_artist'])
+	playPodcast(track_url, track_title, track_artist)
